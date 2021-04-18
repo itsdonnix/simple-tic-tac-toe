@@ -13,7 +13,7 @@
   ];
 
   const board = document.getElementById("board");
-  const boxes = board.querySelectorAll(".box");
+  let boxes = populateBoxes();
   const playerTurnEl = document.body.querySelector("#player-turn");
   // const winnerEl = document.body.querySelector("#winner");
 
@@ -25,9 +25,30 @@
   function onBoxClicked(event) {
     /** @type {HTMLDivElement} */
     const theBox = event.currentTarget;
-    theBox.textContent = currentPlayer;
+    const theBoxSpan = theBox.querySelector("span");
+    theBoxSpan.textContent = currentPlayer;
 
-    const boxesMap = Array.from(boxes).map((box) => box.textContent);
+    theBoxSpan.animate(
+      [
+        {
+          opacity: 0,
+          transform: "scale(0)",
+        },
+        {
+          opacity: 1,
+          transform: "scale(1)",
+        },
+      ],
+      {
+        duration: 300,
+        fill: "forwards",
+        easing: "ease",
+      }
+    );
+
+    const boxesMap = Array.from(boxes).map(
+      (box) => box.querySelector("span").textContent
+    );
 
     for (let j = 0; j < winningRows.length; j++) {
       const winningRow = winningRows[j];
@@ -43,6 +64,19 @@
 
     currentPlayer = currentPlayer === "x" ? "o" : "x";
     playerTurnEl.textContent = currentPlayer;
+  }
+
+  function populateBoxes() {
+    const boxes = [];
+    for (let i = 0; i < 9; i++) {
+      const box = document.createElement("div");
+      box.classList.add("box");
+      const span = document.createElement("span");
+      box.appendChild(span);
+      board.appendChild(box);
+      boxes.push(box);
+    }
+    return boxes;
   }
 
   boxes.forEach((box) =>
