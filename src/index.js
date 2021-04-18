@@ -43,7 +43,7 @@
         },
       ],
       {
-        duration: 300,
+        duration: 100,
         fill: "forwards",
         easing: "ease",
       }
