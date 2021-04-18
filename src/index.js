@@ -114,6 +114,8 @@
     resetBoard();
     scores.o = 0;
     scores.x = 0;
+    scoreEls.o.textContent = 0;
+    scoreEls.x.textContent = 0;
     currentPlayer = randomNum() ? "x" : "o";
     init();
   }
