@@ -52,11 +52,12 @@ body {
 }
 
 .box {
-  cursor: pointer;
   align-items: center;
   background-color: #dcdadd;
+  cursor: pointer;
   display: flex;
   justify-content: center;
+  user-select: none;
 
   &:nth-child(1) {
     border-top-left-radius: 5px;
