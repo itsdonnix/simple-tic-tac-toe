@@ -22,6 +22,14 @@ body {
   margin: 2em auto;
 }
 
+.game-info {
+  align-items: center;
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
 #board {
   background-color: #fff;
   display: grid;
@@ -36,6 +44,11 @@ body {
   min-width: var(--box-min-size);
   padding: 5px;
   border-radius: 5px;
+}
+
+.box,
+.game-info span {
+  text-transform: uppercase;
 }
 
 .box {
