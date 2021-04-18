@@ -1,6 +1,6 @@
 (function () {
-  const randomNum = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-  let currentPlayer = randomNum ? "x" : "o";
+  const randomNum = () => Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+  let currentPlayer = randomNum() ? "x" : "o";
   const scores = { x: 0, o: 0 };
   const winningLines = [
     [0, 1, 2],
@@ -17,6 +17,7 @@
     o: [],
   };
 
+  const btnResetGame = document.body.querySelector("#btn-reset-game");
   const board = document.getElementById("board");
   let boxes = populateBoxes();
   const playerTurnEl = document.body.querySelector("#player-turn");
@@ -27,7 +28,11 @@
   const reverse = (n) => (n === "x" ? "o" : "x");
   // const winnerEl = document.body.querySelector("#winner");
 
-  playerTurnEl.textContent = currentPlayer;
+  function init() {
+    playerTurnEl.textContent = currentPlayer;
+  }
+
+  init();
 
   /**
    * @param {MouseEvent} event
@@ -106,6 +111,14 @@
     scoreEls[player].textContent = scores[player];
   }
 
+  function resetGame() {
+    resetBoard();
+    scores.o = 0;
+    scores.x = 0;
+    currentPlayer = randomNum() ? "x" : "o";
+    init();
+  }
+
   function resetBoard() {
     boxes.forEach((box) => {
       box.querySelector("span").textContent = "";
@@ -128,4 +141,5 @@
   }
 
   boxes.forEach((box) => box.addEventListener("click", onBoxClicked));
+  btnResetGame.addEventListener("click", resetGame);
 })();
