@@ -30,6 +30,18 @@ body {
   margin-bottom: 1em;
 }
 
+.scores {
+  margin-top: 0.3em;
+  margin-bottom: 0.5em;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.scores > div {
+  display: flex;
+}
+
 #board {
   background-color: hsl(0, 0%, 100%);
   display: grid;

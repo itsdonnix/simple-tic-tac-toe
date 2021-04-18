@@ -1,6 +1,7 @@
 (function () {
   const randomNum = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
   let currentPlayer = randomNum ? "x" : "o";
+  const scores = { x: 0, o: 0 };
   const winningRows = [
     [0, 1, 2],
     [3, 4, 5],
@@ -15,6 +16,11 @@
   const board = document.getElementById("board");
   let boxes = populateBoxes();
   const playerTurnEl = document.body.querySelector("#player-turn");
+  const scoreEls = {
+    x: document.querySelector("#x-score"),
+    o: document.querySelector("#o-score"),
+  };
+  const reverse = (n) => (n === "x" ? "o" : "x");
   // const winnerEl = document.body.querySelector("#winner");
 
   playerTurnEl.textContent = currentPlayer;
@@ -27,7 +33,7 @@
     const theBox = event.currentTarget;
     const theBoxSpan = theBox.querySelector("span");
 
-    theBoxSpan.classList.remove(currentPlayer === "x" ? "o" : "x");
+    theBoxSpan.classList.remove(reverse(currentPlayer));
     theBoxSpan.classList.add(currentPlayer);
     theBoxSpan.textContent = currentPlayer;
 
@@ -53,6 +59,8 @@
       (box) => box.querySelector("span").textContent
     );
 
+    let currentWinner = null;
+
     for (let j = 0; j < winningRows.length; j++) {
       const winningRow = winningRows[j];
       const c1 = winningRow[0];
@@ -60,13 +68,20 @@
       const c3 = winningRow[2];
       const boxesIndexes = [boxesMap[c1], boxesMap[c2], boxesMap[c3]];
       if (boxesIndexes.every((v) => v === currentPlayer)) {
-        // winnerEl.textContent = currentPlayer;
+        // currentWinnerEl.textContent = currentPlayer;
+        currentWinner = currentPlayer;
         break;
       }
     }
 
-    currentPlayer = currentPlayer === "x" ? "o" : "x";
+    currentWinner && incrementScore(currentPlayer);
+    currentPlayer = reverse(currentPlayer);
     playerTurnEl.textContent = currentPlayer;
+  }
+
+  function incrementScore(player) {
+    scores[player]++;
+    scoreEls[player].textContent = scores[player];
   }
 
   function populateBoxes() {
