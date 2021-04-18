@@ -1,5 +1,6 @@
 (function () {
-  let currentPlayer = "x";
+  const randomNum = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+  let currentPlayer = randomNum ? "x" : "o";
   const winningRows = [
     [0, 1, 2],
     [3, 4, 5],
