@@ -26,6 +26,9 @@
     /** @type {HTMLDivElement} */
     const theBox = event.currentTarget;
     const theBoxSpan = theBox.querySelector("span");
+
+    theBoxSpan.classList.remove(currentPlayer === "x" ? "o" : "x");
+    theBoxSpan.classList.add(currentPlayer);
     theBoxSpan.textContent = currentPlayer;
 
     theBoxSpan.animate(

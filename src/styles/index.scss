@@ -15,7 +15,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #dede;
+  background-color: hsl(120, 33%, 90%);
 }
 
 .container {
@@ -31,7 +31,7 @@ body {
 }
 
 #board {
-  background-color: #fff;
+  background-color: hsl(0, 0%, 100%);
   display: grid;
   font-size: 50px;
   font-weight: 800;
@@ -53,7 +53,7 @@ body {
 
 .box {
   align-items: center;
-  background-color: #dcdadd;
+  background-color: hsl(280, 4%, 86%);
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -70,5 +70,13 @@ body {
   }
   &:nth-child(9) {
     border-bottom-right-radius: 5px;
+  }
+
+  & .o {
+    color: hsl(0, 0%, 100%);
+  }
+
+  & .x {
+    color: hsl(265, 14%, 33%);
   }
 }
