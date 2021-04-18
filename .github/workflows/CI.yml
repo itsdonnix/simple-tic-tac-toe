@@ -1,0 +1,33 @@
+name: Build & Deploy to GitHub Pages
+
+on:
+  push:
+    paths-ignore:
+      - "README.md"
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "15.7.0"
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
