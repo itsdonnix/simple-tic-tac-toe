@@ -12,6 +12,10 @@
     [2, 4, 6],
     [2, 5, 8],
   ];
+  const prevMatchesIndexes = {
+    x: [],
+    o: [],
+  };
 
   const board = document.getElementById("board");
   let boxes = populateBoxes();
@@ -32,6 +36,8 @@
     /** @type {HTMLDivElement} */
     const theBox = event.currentTarget;
     const theBoxSpan = theBox.querySelector("span");
+
+    if (!!theBoxSpan.textContent) return;
 
     theBoxSpan.classList.remove(reverse(currentPlayer));
     theBoxSpan.classList.add(currentPlayer);
@@ -69,12 +75,28 @@
       const boxesIndexes = [boxesMap[c1], boxesMap[c2], boxesMap[c3]];
       if (boxesIndexes.every((v) => v === currentPlayer)) {
         // currentWinnerEl.textContent = currentPlayer;
-        currentWinner = currentPlayer;
+        /** @type {Array} */
+        const currentPlayerPrevIndexes = prevMatchesIndexes[currentPlayer];
+        const isDuplicatedIndexes = currentPlayerPrevIndexes.some(
+          (v) => v[0] === c1 && v[1] === c2 && v[2] === c3
+        );
+
+        if (!isDuplicatedIndexes) {
+          currentWinner = currentPlayer;
+          prevMatchesIndexes[currentPlayer].push([c1, c2, c3]);
+        }
         break;
       }
     }
 
-    currentWinner && incrementScore(currentPlayer);
+    if (!!currentWinner) {
+      incrementScore(currentPlayer);
+    }
+
+    if (boxes.every((box) => !!box.querySelector("span").textContent)) {
+      resetBoard();
+    }
+
     currentPlayer = reverse(currentPlayer);
     playerTurnEl.textContent = currentPlayer;
   }
@@ -82,6 +104,14 @@
   function incrementScore(player) {
     scores[player]++;
     scoreEls[player].textContent = scores[player];
+  }
+
+  function resetBoard() {
+    boxes.forEach((box) => {
+      box.querySelector("span").textContent = "";
+    });
+    prevMatchesIndexes.o = [];
+    prevMatchesIndexes.x = [];
   }
 
   function populateBoxes() {
