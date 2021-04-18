@@ -2,7 +2,7 @@
   const randomNum = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
   let currentPlayer = randomNum ? "x" : "o";
   const scores = { x: 0, o: 0 };
-  const winningRows = [
+  const winningLines = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -61,8 +61,8 @@
 
     let currentWinner = null;
 
-    for (let j = 0; j < winningRows.length; j++) {
-      const winningRow = winningRows[j];
+    for (let j = 0; j < winningLines.length; j++) {
+      const winningRow = winningLines[j];
       const c1 = winningRow[0];
       const c2 = winningRow[1];
       const c3 = winningRow[2];
@@ -97,7 +97,5 @@
     return boxes;
   }
 
-  boxes.forEach((box) =>
-    box.addEventListener("click", (event) => onBoxClicked(event))
-  );
+  boxes.forEach((box) => box.addEventListener("click", onBoxClicked));
 })();
