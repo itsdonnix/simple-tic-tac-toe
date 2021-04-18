@@ -15,7 +15,7 @@
   const board = document.getElementById("board");
   const boxes = board.querySelectorAll(".box");
   const playerTurnEl = document.body.querySelector("#player-turn");
-  const winnerEl = document.body.querySelector("#winner");
+  // const winnerEl = document.body.querySelector("#winner");
 
   playerTurnEl.textContent = currentPlayer;
 
@@ -36,7 +36,7 @@
       const c3 = winningRow[2];
       const boxesIndexes = [boxesMap[c1], boxesMap[c2], boxesMap[c3]];
       if (boxesIndexes.every((v) => v === currentPlayer)) {
-        winnerEl.textContent = currentPlayer;
+        // winnerEl.textContent = currentPlayer;
         break;
       }
     }
