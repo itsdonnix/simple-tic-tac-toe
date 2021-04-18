@@ -90,7 +90,6 @@
           currentWinner = currentPlayer;
           prevMatchesIndexes[currentPlayer].push([c1, c2, c3]);
         }
-        break;
       }
     }
 
