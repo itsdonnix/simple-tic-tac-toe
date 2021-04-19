@@ -1,7 +1,12 @@
+import { randomNum, reverse } from "./utils";
+
 (function () {
-  const randomNum = () => Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-  let currentPlayer = randomNum() ? "x" : "o";
-  const scores = { x: 0, o: 0 };
+  let currentPlayer;
+
+  const scores = {
+    x: 0,
+    o: 0,
+  };
   const winningLines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -25,14 +30,8 @@
     x: document.querySelector("#x-score"),
     o: document.querySelector("#o-score"),
   };
-  const reverse = (n) => (n === "x" ? "o" : "x");
+
   // const winnerEl = document.body.querySelector("#winner");
-
-  function init() {
-    playerTurnEl.textContent = currentPlayer;
-  }
-
-  init();
 
   /**
    * @param {MouseEvent} event
@@ -93,7 +92,7 @@
       }
     }
 
-    if (!!currentWinner) {
+    if (currentWinner) {
       incrementScore(currentPlayer);
     }
 
@@ -116,7 +115,6 @@
     scores.x = 0;
     scoreEls.o.textContent = 0;
     scoreEls.x.textContent = 0;
-    currentPlayer = randomNum() ? "x" : "o";
     init();
   }
 
@@ -141,6 +139,12 @@
     return boxes;
   }
 
+  function init() {
+    currentPlayer = randomNum() ? "x" : "o";
+    playerTurnEl.textContent = currentPlayer;
+  }
+
   boxes.forEach((box) => box.addEventListener("click", onBoxClicked));
   btnResetGame.addEventListener("click", resetGame);
+  init();
 })();
