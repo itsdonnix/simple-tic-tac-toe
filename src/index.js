@@ -54,14 +54,17 @@ import { randomNum, reverse } from "./utils";
           transform: "scale(0)",
         },
         {
+          transform: "scale(1.6)",
+        },
+        {
           opacity: 1,
-          transform: "scale(1)",
+          tranform: "scale(1)",
         },
       ],
       {
-        duration: 100,
+        duration: 200,
         fill: "forwards",
-        easing: "ease",
+        easing: "linear",
       }
     );
 
