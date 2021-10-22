@@ -24,7 +24,7 @@ import { randomNum, reverse } from "./utils";
 
   const btnResetGame = document.body.querySelector("#btn-reset-game");
   const board = document.getElementById("board");
-  let boxes = populateBoxes();
+  const boxes = populateBoxes();
   const playerTurnEl = document.body.querySelector("#player-turn");
   const scoreEls = {
     x: document.querySelector("#x-score"),
@@ -77,6 +77,7 @@ import { randomNum, reverse } from "./utils";
       const c2 = winningRow[1];
       const c3 = winningRow[2];
       const boxesIndexes = [boxesMap[c1], boxesMap[c2], boxesMap[c3]];
+
       if (boxesIndexes.every((v) => v === currentPlayer)) {
         // currentWinnerEl.textContent = currentPlayer;
         /** @type {Array} */
@@ -104,6 +105,9 @@ import { randomNum, reverse } from "./utils";
     playerTurnEl.textContent = currentPlayer;
   }
 
+  /**
+   * @param {String} player
+   */
   function incrementScore(player) {
     scores[player]++;
     scoreEls[player].textContent = scores[player];
